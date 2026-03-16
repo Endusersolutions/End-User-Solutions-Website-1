@@ -3,29 +3,306 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>End User Solutions</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>End User Solutions | Operational Superiority</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Teko:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- BRAND COLORS & VARIABLES --- */
+        :root {
+            --topo-green: #0d1610;
+            --charcoal-bg: #1c1d1f;
+            --card-bg: #132015;
+            --tactical-orange: #f29025;
+            --glow-orange: rgba(242, 144, 37, 0.4); 
+            --text-main: #ffffff;
+            --text-muted: #aeb1b3;
+            --border-dark: #2a2d2e;
+            --metallic-bg: linear-gradient(to bottom, #54575a, #26282a);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--topo-green);
+            background-image: url("data:image/svg+xml,%3Csvg width='150' height='150' viewBox='0 0 150 150' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15 15c30 30 60 0 90 30s30 60 0 90-60 30-90 0-30-60 0-90z' fill='none' stroke='%231f2d22' stroke-width='1' stroke-opacity='0.6'/%3E%3Cpath d='M40 40c20 20 40 0 60 20s20 40 0 60-40 20-60 0-20-40 0-60z' fill='none' stroke='%231f2d22' stroke-width='1' stroke-opacity='0.6'/%3E%3C/svg%3E");
+            color: var(--text-main);
+            line-height: 1.5;
+        }
+
+        h1, h2, h3, .brand-text, .btn {
+            font-family: 'Teko', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        .main-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: var(--charcoal-bg);
+            box-shadow: 0 0 40px rgba(0,0,0,0.8);
+            position: relative;
+        }
+
+        header {
+            background-color: #232527;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-dark);
+        }
+
+        .logo-area { display: flex; align-items: center; gap: 15px; }
+        .logo-icon-placeholder {
+            width: 45px; height: 35px; background-color: #444; border-radius: 4px;
+        }
+        .brand-text { font-size: 1.7rem; color: #d1d5d8; font-weight: 500; }
+
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a {
+            font-size: 0.9rem; font-weight: 500; color: var(--text-muted);
+            text-transform: uppercase; transition: color 0.3s; padding-bottom: 4px;
+        }
+        .nav-links a:hover { color: var(--tactical-orange); }
+        .nav-links a.active {
+            color: var(--tactical-orange); border-bottom: 2px solid var(--tactical-orange);
+        }
+
+        .hero {
+            position: relative;
+            padding: 80px 40px 170px 40px; 
+            background: linear-gradient(to right, rgba(28, 29, 31, 0.95) 0%, rgba(28, 29, 31, 0.4) 100%), #1c1d1f;
+            background-size: cover;
+            background-position: center;
+            border-bottom: 1px solid #333;
+        }
+
+        .hero-content { max-width: 600px; position: relative; z-index: 2; }
+        .hero h1 {
+            font-size: 4.2rem; line-height: 1.05; margin-bottom: 15px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+        }
+        .text-orange { color: var(--tactical-orange); }
+        
+        .hero p {
+            font-size: 1.15rem; color: #e0e0e0; margin-bottom: 30px; max-width: 500px;
+        }
+
+        .btn-group { display: flex; gap: 15px; }
+        .btn {
+            padding: 10px 20px; font-size: 1.2rem; font-weight: 500;
+            cursor: pointer; transition: 0.3s; border-radius: 3px; display: inline-block;
+        }
+        .btn-solid { background-color: var(--tactical-orange); color: #000; border: 1px solid var(--tactical-orange); }
+        .btn-solid:hover { background-color: #d97d19; }
+        .btn-outline { background-color: transparent; color: var(--tactical-orange); border: 1px solid var(--tactical-orange); }
+        .btn-outline:hover { background-color: rgba(242, 144, 37, 0.1); }
+
+        .capabilities-section {
+            padding: 0 40px;
+            margin-top: -100px;
+            position: relative;
+            z-index: 10;
+            padding-bottom: 50px;
+        }
+
+        .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--tactical-orange);
+            box-shadow: 0 0 15px var(--glow-orange), inset 0 0 20px rgba(0,0,0,0.6);
+            padding: 30px 25px; border-radius: 4px; text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .card:hover { transform: translateY(-5px); }
+        
+        .card-icon { font-size: 2.2rem; margin-bottom: 10px; opacity: 0.9; }
+        .card h3 { font-size: 1.8rem; margin-bottom: 15px; line-height: 1.1; color: #fff; }
+        
+        .card ul { text-align: left; }
+        .card ul li {
+            font-size: 0.9rem; color: #c7c9cb; margin-bottom: 8px;
+            padding-left: 14px; position: relative;
+        }
+        .card ul li::before {
+            content: '•'; color: var(--tactical-orange);
+            position: absolute; left: 0; top: 0; font-size: 1.2rem; line-height: 1;
+        }
+
+        .mission-banner {
+            background: var(--metallic-bg);
+            padding: 60px 40px; display: flex; align-items: center; gap: 40px;
+            box-shadow: inset 0 10px 20px rgba(0,0,0,0.4), inset 0 -10px 20px rgba(0,0,0,0.4);
+            border-top: 1px solid #666; border-bottom: 1px solid #111;
+        }
+
+        .mission-logo {
+            flex: 0 0 220px; height: 140px; background-color: #222; border-radius: 5px;
+            display: flex; align-items: center; justify-content: center; color: #555;
+        }
+
+        .mission-text h2 {
+            font-size: 2.8rem; margin-bottom: 10px; text-shadow: 1px 1px 2px rgba(0,0,0,0.6); line-height: 1;
+        }
+        .mission-text p { font-size: 1.05rem; color: #e0e0e0; max-width: 600px; }
+
+        footer {
+            background-color: var(--charcoal-bg);
+            padding: 50px 40px 20px 40px; position: relative; overflow: hidden;
+        }
+
+        .serving-title { text-align: center; font-size: 1.8rem; margin-bottom: 40px; letter-spacing: 1px; }
+
+        .agencies-grid {
+            display: flex; justify-content: center; gap: 50px; margin-bottom: 50px; position: relative; z-index: 2;
+        }
+
+        .agency-item { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+        .agency-item .icon { font-size: 2.2rem; color: #888; }
+        .agency-item span { font-family: 'Teko', sans-serif; font-size: 1.3rem; color: #fff; letter-spacing: 0.5px; }
+
+        .bottom-bar {
+            display: flex; justify-content: space-between; align-items: center;
+            padding-top: 20px; border-top: 1px solid #333; font-size: 0.85rem; color: #888;
+        }
+        .bottom-links { display: flex; gap: 20px; }
+        .bottom-links a:hover { color: #fff; }
+
+        @media (max-width: 900px) {
+            .cards-grid { grid-template-columns: 1fr; }
+            .capabilities-section { margin-top: -50px; }
+            .mission-banner { flex-direction: column; text-align: center; }
+            .agencies-grid { flex-wrap: wrap; gap: 30px; }
+            .bottom-bar { flex-direction: column; gap: 10px; text-align: center; }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome to End User Solutions</h1>
-    </header>
-    <main>
-        <section>
-            <h2>About Us</h2>
-            <p>We provide innovative solutions for end-users to enhance their experience.</p>
+
+    <div class="main-container">
+
+        <header>
+            <div class="logo-area">
+                <div class="logo-icon-placeholder"></div>
+                <div class="brand-text">END USER SOLUTIONS</div>
+            </div>
+            <nav class="nav-links">
+                <a href="#" class="active">HOME</a>
+                <a href="#">ABOUT</a>
+                <a href="#">CAPABILITIES</a>
+                <a href="#">SERVICES</a>
+                <a href="#">CONTACT</a>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <div class="hero-content">
+                <h1>
+                    CREATING THE <span class="text-orange">OPERATORS</span><br>
+                    <span class="text-orange">DEFINITIVE</span> EDGE.
+                </h1>
+                <p>Advising, Integrating, Innovating, & Training for Defense, Government, & First Responders.</p>
+                <div class="btn-group">
+                    <a href="#" class="btn btn-solid">[ EXPLORE CAPABILITIES ]</a>
+                    <a href="#" class="btn btn-outline">[ REQUEST A BRIEFING ]</a>
+                </div>
+            </div>
         </section>
-        <section>
-            <h2>Services</h2>
-            <ul>
-                <li>Consulting</li>
-                <li>Technical Support</li>
-                <li>Custom Solutions</li>
-            </ul>
+
+        <section class="capabilities-section">
+            <div class="cards-grid">
+                
+                <div class="card">
+                    <div class="card-icon">🚁🛰️</div>
+                    <h3>ADVISING &<br>INTEGRATION</h3>
+                    <ul>
+                        <li>Strategic Program Development</li>
+                        <li>Hardware & Systems Integration</li>
+                        <li>NDAA / Blue UAS Compliance</li>
+                        <li>Procurement & Lifecycle Support</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🛡️</div>
+                    <h3>TACTICAL<br>TRAINING</h3>
+                    <ul>
+                        <li>Advanced Flight Maneuvers</li>
+                        <li>Night Ops & Thermal Integration</li>
+                        <li>Part 107 & COA Navigation</li>
+                        <li>Agency-Specific SOP Development</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🎯⚙️</div>
+                    <h3>DEFENSE<br>INNOVATION</h3>
+                    <ul>
+                        <li>Emerging Threat Assessment</li>
+                        <li>Custom Payload Solutions</li>
+                        <li>C-UAS (Counter-Drone) Strategy</li>
+                        <li>Defense Tech R&D Consulting</li>
+                    </ul>
+                </div>
+
+            </div>
         </section>
-    </main>
-    <footer>
-        <p>&copy; 2026 End User Solutions. All rights reserved.</p>
-    </footer>
+
+        <section class="mission-banner">
+            <div class="mission-logo">
+                [ Large Metallic Logo ]
+            </div>
+            <div class="mission-text">
+                <h2>MISSION-DRIVEN<br>TECHNOLOGY</h2>
+                <p>EUS bridges the gap between complex defense engineering and the end-user on the front lines. We ensure your systems act as force multipliers, not technical burdens, for local, state, and federal agencies operating in zero-fail environments.</p>
+            </div>
+        </section>
+
+        <footer>
+            <h3 class="serving-title">SERVING OUR NATION'S DEFENDERS</h3>
+            
+            <div class="agencies-grid">
+                <div class="agency-item">
+                    <div class="icon">🦅</div>
+                    <span>DOW</span>
+                </div>
+                <div class="agency-item">
+                    <div class="icon">⚛️</div>
+                    <span>FEDERAL AGENCIES</span>
+                </div>
+                <div class="agency-item">
+                    <div class="icon">🛡️⭐</div>
+                    <span>LAW ENFORCEMENT</span>
+                </div>
+                <div class="agency-item">
+                    <div class="icon">🚑🚒</div>
+                    <span>FIRST RESPONDERS</span>
+                </div>
+            </div>
+
+            <div class="bottom-bar">
+                <div class="bottom-links">
+                    <a href="#">endusersolutions.us</a>
+                    <a href="#">info@endusersolutions.us</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+                <div>© 2026 End User Solutions. All rights reserved.</div>
+            </div>
+        </footer>
+
+    </div>
+
 </body>
 </html>
